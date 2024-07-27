@@ -26,13 +26,19 @@ public class DepartmentController {
     }
 
     @PutMapping(path = "/{departmentId}/manager/{employeeId}")
-    public DepartmentEntity assignManagerToDepartment(@PathVariable DepartmentEntity departmentId,
-                                                      @PathVariable EmployeeEntity employeeId){
+    public DepartmentEntity assignManagerToDepartment(@PathVariable Long departmentId,
+                                                      @PathVariable Long employeeId){
         return departmentService.assignManagerToDepartment(departmentId, employeeId);
     }
 
     @GetMapping(path = "/assignedDepartmentOfManager/{employeeId}")
     public DepartmentEntity getAssignedDepartmentOfManager(@PathVariable Long employeeId){
         return departmentService.getAssignedDepartmentOfManager(employeeId);
+    }
+
+    @PutMapping(path = "/{departmentId}/worker/{employeeId}")
+    public DepartmentEntity assignWorkerToDepartment(@PathVariable Long departmentId,
+                                                      @PathVariable Long employeeId){
+        return departmentService.assignWorkerToDepartment(departmentId, employeeId);
     }
 }

@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Entity
 @Builder
 @Data
@@ -25,4 +27,15 @@ public class EmployeeEntity {
     @OneToOne(mappedBy = "manager")
     @JsonIgnore
     private DepartmentEntity managedDepartment;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "worker_department_id")
+    @JsonIgnore
+    private DepartmentEntity workerDepartment;
+
+    @ManyToMany
+    @JoinTable(name = "freelancer_department_mappings",
+    joinColumns = @JoinColumn(name = "employee_id"),
+    inverseJoinColumns = @JoinColumn(name = "department_id"))
+    private Set<DepartmentEntity> freelanceDeparments;
 }
