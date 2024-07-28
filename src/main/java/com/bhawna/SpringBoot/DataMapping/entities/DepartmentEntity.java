@@ -30,15 +30,18 @@ public class DepartmentEntity {
     @OneToMany(mappedBy = "workerDepartment", fetch = FetchType.EAGER)
     private Set<EmployeeEntity> workers;
 
+    @ManyToMany(mappedBy = "freelanceDepartments")
+    private Set<EmployeeEntity> freelancers;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof DepartmentEntity that)) return false;
-        return Objects.equals(id, that.id) && Objects.equals(title, that.title);
+        return Objects.equals(getId(), that.getId()) && Objects.equals(title, that.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title);
+        return Objects.hash(getId(), getTitle());
     }
 }

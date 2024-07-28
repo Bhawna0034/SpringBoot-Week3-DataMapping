@@ -29,13 +29,16 @@ public class EmployeeEntity {
     private DepartmentEntity managedDepartment;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "worker_department_id")
+   // @JoinColumn(name = "worker_department_id")
+    @JoinTable(name = "worker_department_mapping")
     @JsonIgnore
     private DepartmentEntity workerDepartment;
 
     @ManyToMany
-    @JoinTable(name = "freelancer_department_mappings",
+    @JoinTable(name = "freelancer_department_mapping",
     joinColumns = @JoinColumn(name = "employee_id"),
-    inverseJoinColumns = @JoinColumn(name = "department_id"))
-    private Set<DepartmentEntity> freelanceDeparments;
+    inverseJoinColumns = @JoinColumn(name = "department_id")
+    )
+    @JsonIgnore
+    private Set<DepartmentEntity> freelanceDepartments;
 }
